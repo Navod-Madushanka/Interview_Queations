@@ -1,4 +1,4 @@
-package recursion.tail_recurtion.tower_of_hanoi;
+package recursion.tower_of_hanoi;
 
 public class GFG {
     static void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod){
