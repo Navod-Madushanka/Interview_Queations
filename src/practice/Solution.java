@@ -2,24 +2,38 @@ package practice;
 
 public class Solution {
 
-    public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        if(n <= 0) return false;
+    public String reverseVowels(String s) {
+        char[] chars = s.toCharArray();
+        int left = 0, right = chars.length - 1;
 
-        for(int i = 0; i < flowerbed.length; i++){
-            boolean left = i == 0 || flowerbed[i-1] == 0;
-            boolean right = i == flowerbed.length-1 || flowerbed[i+1] == 0;
+        while (left < right) {
+            while (left < right && !isVowel(chars[left])) {
+                left++;
+            }
 
-            if(left && right && flowerbed[i] == 0) {
-                flowerbed[i] = 1;
-                n--;
-                if(n <= 0) return true;
+            while (left < right && !isVowel(chars[right])) {
+                right--;
+            }
+
+            if (left < right) {
+                char temp = chars[left];
+                chars[left] = chars[right];
+                chars[right] = temp;
+
+                left++;
+                right--;
             }
         }
-        return false;
+        return new String(chars);
+    }
+
+    private boolean isVowel(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ||
+                c == 'A' || c == 'E' || c == 'I' || c == 'O' ||c == 'U';
     }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println(solution.canPlaceFlowers(new int[]{1,0,0,0,1}, 1));
+        System.out.println(solution.reverseVowels("Icecream"));
     }
 }
