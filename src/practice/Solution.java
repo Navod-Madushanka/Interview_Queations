@@ -1,35 +1,25 @@
 package practice;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Solution {
 
-    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies){
-        List<Boolean> result = new ArrayList<Boolean>();
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        if(n <= 0) return false;
 
-        int maxCandies = candies[0];
+        for(int i = 0; i < flowerbed.length; i++){
+            boolean left = i == 0 || flowerbed[i-1] == 0;
+            boolean right = i == flowerbed.length-1 || flowerbed[i+1] == 0;
 
-        for(int candy : candies){
-            if(candy > maxCandies){
-                maxCandies = candy;
+            if(left && right && flowerbed[i] == 0) {
+                flowerbed[i] = 1;
+                n--;
+                if(n <= 0) return true;
             }
         }
-
-        for(int i = 0; i < candies.length; i++){
-            if(candies[i]+extraCandies >= maxCandies){
-                result.add(true);
-            }else{
-                result.add(false);
-            }
-        }
-
-        return result;
+        return false;
     }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] candies = {2,3,5,1,3};
-        System.out.println(solution.kidsWithCandies(candies, 3));
+        System.out.println(solution.canPlaceFlowers(new int[]{1,0,0,0,1}, 1));
     }
 }
